@@ -1,5 +1,5 @@
 import {Routes} from '@angular/router';
-import {redirectUnauthorizedTo} from "@angular/fire/auth-guard";
+import {authGuard} from "./shared/guards/auth.guard";
 
 export const AppRoutes = {
   Auth: 'auth',
@@ -18,6 +18,6 @@ export const routes: Routes = [
   },
   {
     path: AppRoutes.ToDo,
-    canActivate: [redirectUnauthorizedTo],
     loadChildren: () => import('./modules/to-do/to-do.module').then(m => m.ToDoModule),
+    canActivate: [authGuard]
   }];

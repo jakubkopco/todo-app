@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {AuthChangeEvent, AuthSession, createClient, Session, SupabaseClient} from "@supabase/supabase-js";
 import {environment} from "../../../environments/environment";
-import {Observable, Subject} from "rxjs";
+import {Subject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -33,9 +33,5 @@ export class SupabaseService {
 
   get client(): typeof this.supabase {
     return this.supabase;
-  }
-
-  get userSessionData(): Observable<{id: string, email: string}> {
-    return this.userSessionSubject.asObservable() as Observable<{id: string, email: string}>;
   }
 }

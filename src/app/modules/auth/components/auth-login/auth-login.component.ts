@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, effect} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {MatFormField, MatLabel} from "@angular/material/form-field";
 import {MatCard, MatCardContent, MatCardHeader, MatCardTitle} from "@angular/material/card";
@@ -7,8 +7,6 @@ import {MatInput} from "@angular/material/input";
 import {Router} from "@angular/router";
 import {MatButton} from "@angular/material/button";
 import {AppRoutes} from "../../../../app.routes";
-import {MatDialog} from "@angular/material/dialog";
-import {CustomDialogComponent} from "../../../../shared/components/custom-dialog/custom-dialog.component";
 import {CustomDialogService} from "../../../../shared/services/custom-dialog.service";
 
 @Component({
@@ -36,8 +34,14 @@ export class AuthLoginComponent {
     private readonly supabase: AuthService,
     private readonly formBuilder: FormBuilder,
     private readonly router: Router,
-    private readonly dialogService: CustomDialogService
+    private readonly dialogService: CustomDialogService,
+    private readonly authService: AuthService
   ) {
+    effect(() => {
+      if (this.authService.isLogged()) {
+        this.router.navigate(['/', AppRoutes.ToDo]);
+      }
+    });
     this.signInForm = this.formBuilder.group({
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required, Validators.minLength(8)]),
