@@ -88,3 +88,8 @@ body {
 .mat-mdc-text-field-wrapper {
   border-radius: 0.8rem !important;
 }
+
+mat-spinner {
+  margin: 50vh auto 0;
+  transform: translateY(-50%);
+}

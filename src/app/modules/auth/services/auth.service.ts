@@ -14,14 +14,7 @@ export class AuthService {
 
   constructor(private readonly supabase: SupabaseService) {
     this.supabase.authChanges((event) => {
-      switch (event) {
-        case 'SIGNED_IN':
-          this.isLogged.set(true);
-          break;
-        case 'SIGNED_OUT':
-          this.isLogged.set(false);
-          break;
-      }
+      this.isLogged.set(event === 'SIGNED_IN');
     });
   }
   signIn(user: AuthFormModel) {

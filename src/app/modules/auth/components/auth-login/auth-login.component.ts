@@ -8,6 +8,7 @@ import {Router} from "@angular/router";
 import {MatButton} from "@angular/material/button";
 import {AppRoutes} from "../../../../app.routes";
 import {CustomDialogService} from "../../../../shared/services/custom-dialog.service";
+import {MatProgressSpinner} from "@angular/material/progress-spinner";
 
 @Component({
   selector: 'app-auth-login',
@@ -22,7 +23,8 @@ import {CustomDialogService} from "../../../../shared/services/custom-dialog.ser
     MatCard,
     ReactiveFormsModule,
     MatInput,
-    MatButton
+    MatButton,
+    MatProgressSpinner
   ],
   styleUrls: ['./auth-login.component.scss']
 })
@@ -58,10 +60,6 @@ export class AuthLoginComponent {
               title: 'Error',
               message: res.error.message,
             })
-          } else {
-            if (res.data?.user?.role === 'authenticated') {
-              this.router.navigate(['/', AppRoutes.ToDo]);
-            }
           }
         });
       } catch (error) {
@@ -98,7 +96,7 @@ export class AuthLoginComponent {
         }
       } finally {
         this.signInForm.reset()
-        this.loading = false
+        this.loading = false;
       }
     }
   }
