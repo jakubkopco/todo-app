@@ -49,43 +49,57 @@ export class AuthLoginComponent {
   }
 
   async signIn(): Promise<void> {
-    try {
-      this.loading = true
-      this.supabase.signIn(this.signInForm.value).then((res) => {
-        if (res.data?.user?.role === 'authenticated') {
-          this.router.navigate(['/', AppRoutes.ToDo]);
+    if (this.signInForm.valid) {
+      try {
+        this.loading = true
+        this.supabase.signIn(this.signInForm.value).then((res) => {
+          if (res.error) {
+            this.dialogService.openDialog({
+              title: 'Error',
+              message: res.error.message,
+            })
+          } else {
+            if (res.data?.user?.role === 'authenticated') {
+              this.router.navigate(['/', AppRoutes.ToDo]);
+            }
+          }
+        });
+      } catch (error) {
+        if (error instanceof Error) {
+          alert(error.message);
         }
-      });
-    } catch (error) {
-      if (error instanceof Error) {
-        alert(error.message);
+      } finally {
+        this.signInForm.reset();
+        this.loading = false;
       }
-    } finally {
-      this.signInForm.reset();
-      this.loading = false;
     }
   }
 
   async signUp(): Promise<void> {
-    try {
-      this.loading = true;
-      this.supabase.signUpNewUser(this.signInForm.value).then((res) => {
-         if (res.error) {
-           console.error(res.error);
-         } else {
-           this.dialogService.openDialog({
+    if (this.signInForm.valid) {
+      try {
+        this.loading = true;
+        this.supabase.signUpNewUser(this.signInForm.value).then((res) => {
+          if (res.error) {
+            this.dialogService.openDialog({
+              title: 'Error',
+              message: res.error.message,
+            })
+          } else {
+            this.dialogService.openDialog({
               title: 'Success',
               message: 'Please check your email for verification link',
-           })
-         }
-      });
-    } catch (error) {
-      if (error instanceof Error) {
-        alert(error.message)
+            })
+          }
+        });
+      } catch (error) {
+        if (error instanceof Error) {
+          alert(error.message)
+        }
+      } finally {
+        this.signInForm.reset()
+        this.loading = false
       }
-    } finally {
-      this.signInForm.reset()
-      this.loading = false
     }
   }
 }
