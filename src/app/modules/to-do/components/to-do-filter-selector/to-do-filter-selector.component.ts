@@ -56,7 +56,7 @@ import {FormControl, ReactiveFormsModule} from "@angular/forms";
 export class ToDoFilterSelectorComponent {
   public searchControl: FormControl = new FormControl();
   protected readonly ToDoItemStatusModel = ToDoItemStatus;
-  @Output() selectedFilterEmitter: EventEmitter<any> = new EventEmitter();
+  @Output() selectedFilterEmitter: EventEmitter<ToDoItemStatus> = new EventEmitter();
   @Output() searchEmitter: EventEmitter<string> = new EventEmitter();
 
   constructor() {
