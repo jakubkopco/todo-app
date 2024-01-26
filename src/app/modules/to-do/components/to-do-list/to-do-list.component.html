@@ -5,7 +5,7 @@
 <cdk-virtual-scroll-viewport itemSize="50">
   <mat-list-item *cdkVirtualFor="let item of filteredToDoItems$ | async; let i = index">
     <div class="headerOfItem">
-      <p class="titleWithDate">{{ item.title }} - {{ item.date | date: 'd.M.yy' }}</p>
+      <p class="titleWithDate">{{ item.title }} - {{ item.date | date: 'd.M.Y' }}</p>
       <mat-icon (click)="deleteItem(item.id)">close</mat-icon>
     </div>
     <div class="descriptionWithCheckBox">
