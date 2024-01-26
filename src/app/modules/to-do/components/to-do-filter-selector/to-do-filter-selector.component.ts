@@ -13,18 +13,18 @@ import {FormControl, ReactiveFormsModule} from "@angular/forms";
   ],
   template: `
     <hr>
-    <div style="display: flex; justify-content: space-between; padding: 15px">
-      <input type="text" [formControl]="searchControl" placeholder="Vyhľadať todo">
-      <mat-button-toggle-group style="border-radius: 0.8rem !important" name="selectedFilter" aria-label="Selected filter"
+    <div class="filterSelectorWrapper">
+      <input type="text" [formControl]="searchControl" placeholder="Search...">
+      <mat-button-toggle-group name="selectedFilter" aria-label="Selected filter"
                                [value]="ToDoItemStatusModel.All">
         <mat-button-toggle [value]="ToDoItemStatusModel.All"
-                           (click)="selectFilter(ToDoItemStatusModel.All)">Všetky
+                           (click)="selectFilter(ToDoItemStatusModel.All)">All
         </mat-button-toggle>
         <mat-button-toggle [value]="ToDoItemStatusModel.InProgress"
-                           (click)="selectFilter(ToDoItemStatusModel.InProgress)">Aktívne
+                           (click)="selectFilter(ToDoItemStatusModel.InProgress)">In progress
         </mat-button-toggle>
         <mat-button-toggle [value]="ToDoItemStatusModel.Completed"
-                           (click)="selectFilter(ToDoItemStatusModel.Completed)">Dokončené
+                           (click)="selectFilter(ToDoItemStatusModel.Completed)">Completed
         </mat-button-toggle>
       </mat-button-toggle-group>
     </div>
@@ -41,6 +41,14 @@ import {FormControl, ReactiveFormsModule} from "@angular/forms";
         border: none;
         border-top: 1px solid #e0e0e0;
         margin: 0 !important;
+      }
+      mat-button-toggle-group {
+        border-radius: 0.8rem !important;
+      }
+      .filterSelectorWrapper {
+        display: flex;
+        justify-content: space-between;
+        padding: 15px;
       }
     `
   ]

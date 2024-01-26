@@ -3,16 +3,14 @@
     (selectedFilterEmitter)="filterItems($event)"
     (searchEmitter)="searchItems($event)">
   </app-to-do-filter-selector>
-  <cdk-virtual-scroll-viewport itemSize="50"
-                               style="display: flex; flex-direction: column; height: 50vh; padding-inline: 15px">
-    <mat-list-item *cdkVirtualFor="let item of filteredToDoItems$ | async; let i = index"
-                   style="display: block; margin: 1rem; height: 100%; box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19); border-radius: 0.8rem">
-      <div style="display: flex; justify-content: space-between; background-color: seashell; padding: 10px 15px; border-radius: 0.8rem 0.8rem 0 0">
-        <p style="margin: 0; font-size: 22px; font-weight: bold">{{ item.title }} - {{ item.date | date: 'd.M.yy' }}</p>
-        <mat-icon (click)="deleteItem(item.id)" style="width: 40px; display: flex; justify-content: center; cursor: pointer">delete_forever</mat-icon>
+  <cdk-virtual-scroll-viewport itemSize="50">
+    <mat-list-item *cdkVirtualFor="let item of filteredToDoItems$ | async; let i = index">
+      <div class="headerOfItem">
+        <p class="titleWithDate">{{ item.title }} - {{ item.date | date: 'd.M.yy' }}</p>
+        <mat-icon (click)="deleteItem(item.id)">close</mat-icon>
       </div>
-      <div style="display: flex; padding: 15px; align-items: center; justify-content: space-between">
-        <p style="margin: 0 !important;">{{ item.description }}</p>
+      <div class="descriptionWithCheckBox">
+        <p class="description">{{ item.description }}</p>
         <mat-checkbox class="example-margin"
                       [checked]="item.completed"
                       color="primary"

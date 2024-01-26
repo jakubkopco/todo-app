@@ -5,7 +5,6 @@
 $my-primary: mat.define-palette(mat.$indigo-palette, 500);
 $my-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
 
-// The "warn" palette is optional and defaults to red if not specified.
 $my-warn: mat.define-palette(mat.$red-palette);
 $my-primary: mat.define-palette(mat.$indigo-palette, 500);
 $my-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
@@ -20,18 +19,15 @@ $my-theme: mat.define-light-theme((
   density: 0,
 ));
 
-// Define a dark theme
 $dark-theme: mat.define-dark-theme((
   color: (
     primary: mat.define-palette(mat.$pink-palette),
     accent: mat.define-palette(mat.$blue-grey-palette),
   ),
-  // Only include `typography` and `density` in the default dark theme.
   typography: mat.define-typography-config(),
   density: 0,
 ));
 
-// Define a light theme
 $light-theme: mat.define-light-theme((
   color: (
     primary: mat.define-palette(mat.$indigo-palette),
@@ -39,14 +35,10 @@ $light-theme: mat.define-light-theme((
   ),
 ));
 
-// Apply the dark theme by default
 @include mat.core-theme($dark-theme);
 @include mat.button-theme($dark-theme);
 
-// Apply the light theme only when the user prefers light themes.
 @media (prefers-color-scheme: light) {
-  // Use the `-color` mixins to only apply color styles without reapplying the same
-  // typography and density styles.
   @include mat.core-color($light-theme);
   @include mat.button-color($light-theme);
 }
@@ -66,7 +58,7 @@ body {
   background-color: ivory !important;
 }
 
-.login-container {
+.login-card {
   button {
     border-radius: 0.8rem;
   }
@@ -75,7 +67,7 @@ body {
 .wrappedContainer {
   width: 100%;
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 2rem auto;
   border-radius: 0.8rem;
   background: white;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 2px 10px 0 rgba(0, 0, 0, 0.19);
@@ -92,4 +84,12 @@ body {
 mat-spinner {
   margin: 50vh auto 0;
   transform: translateY(-50%);
+}
+
+mat-card-title {
+  font-size: 28px;
+}
+
+mat-card {
+  padding: 1.2rem;
 }

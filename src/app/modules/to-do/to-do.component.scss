@@ -1,0 +1,43 @@
+mat-toolbar {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  padding: 1rem;
+  border-radius: 0.8rem 0.8rem 0 0;
+}
+
+mat-icon {
+  cursor: pointer;
+}
+
+form {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
+
+button {
+  background-color: lightgray;
+}
+
+.wrappedForm {
+  padding: 1rem;
+}
+
+.titleFormField {
+  display: block;
+  width: 40%;
+  margin-right: 10px;
+}
+
+.styledButton {
+  display: flex;
+  height: auto;
+  align-items: center;
+  padding: 0 1rem 1rem 1rem;
+}
+
+.descriptionField {
+  display: flex;
+  width: 100%;
+}

@@ -1,13 +1,13 @@
 @if (!loading) {
-  <div class="login-container">
-    <mat-card style="padding: 10px">
-      <mat-card-header style="display: flex; padding-bottom: 20px; justify-content: center">
-        <mat-card-title style="font-size: 28px">Prihlásenie</mat-card-title>
+  <div class="login-card">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Log in</mat-card-title>
       </mat-card-header>
       <mat-card-content>
         <form class="login-form" [formGroup]="signInForm">
           <mat-form-field appearance="fill">
-            <mat-label>Email</mat-label>
+            <mat-label>E-mail</mat-label>
             <input matInput
                    id="email"
                    formControlName="email"
@@ -16,7 +16,7 @@
                    placeholder="Your email">
           </mat-form-field>
           <mat-form-field appearance="fill">
-            <mat-label>Heslo</mat-label>
+            <mat-label>Password</mat-label>
             <input matInput
                    id="password"
                    formControlName="password"
@@ -25,14 +25,14 @@
                    placeholder="Your password"
                    autocomplete="true">
           </mat-form-field>
-          <div style="display: flex; width: 100%">
-            <button style="display: flex; width: 100%; margin: 5px" mat-raised-button type="submit"
+          <div class="wrappedButtons">
+            <button mat-raised-button type="submit"
                     class="button block primary" [disabled]="loading" (click)="signIn()">
-              {{ loading ? 'Loading' : 'Prihlásiť sa' }}
+              {{ loading ? 'Loading' : 'Sign In' }}
             </button>
-            <button style="display: flex; width: 100%; margin: 5px" mat-raised-button type="submit"
+            <button mat-raised-button type="submit"
                     class="button block primary" [disabled]="loading" (click)="signUp()">
-              {{ loading ? 'Loading' : 'Registovať sa' }}
+              {{ loading ? 'Loading' : 'Sign Up' }}
             </button>
           </div>
         </form>

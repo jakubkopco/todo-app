@@ -1,19 +1,23 @@
-.login-container {
+.login-card {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
+
   mat-card {
     max-width: 400px;
     width: 100%;
     margin: 30px;
   }
+
   .login-form {
     display: flex;
     flex-direction: column;
+
     mat-form-field {
       margin-bottom: 20px;
     }
+
     button {
       margin-top: 10px;
     }
@@ -25,6 +29,24 @@ mat-card {
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
+mat-card-header {
+  display: flex;
+  padding-bottom: 20px;
+  justify-content: center;
+}
+
 .mat-mdc-form-field-subscript-wrapper {
   display: none !important;
+}
+
+.wrappedButtons {
+  display: flex;
+  width: 100%;
+}
+
+button {
+  display: flex;
+  width: 100%;
+  margin: 5px;
+  font-size: 16px;
 }
