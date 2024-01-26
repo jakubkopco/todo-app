@@ -58,21 +58,6 @@ body {
   background-color: ivory !important;
 }
 
-.login-card {
-  button {
-    border-radius: 0.8rem;
-  }
-}
-
-.wrappedContainer {
-  width: 100%;
-  max-width: 1200px;
-  margin: 2rem auto;
-  border-radius: 0.8rem;
-  background: white;
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 2px 10px 0 rgba(0, 0, 0, 0.19);
-}
-
 .mdc-line-ripple::before {
   display: none;
 }

@@ -26,12 +26,12 @@
                    autocomplete="true">
           </mat-form-field>
           <div class="wrappedButtons">
-            <button mat-raised-button type="submit"
-                    class="button block primary" [disabled]="loading" (click)="signIn()">
+            <button mat-raised-button
+                    class="button" [disabled]="loading" (click)="signIn()">
               {{ loading ? 'Loading' : 'Sign In' }}
             </button>
             <button mat-raised-button type="submit"
-                    class="button block primary" [disabled]="loading" (click)="signUp()">
+                    class="button" [disabled]="loading" (click)="signUp()">
               {{ loading ? 'Loading' : 'Sign Up' }}
             </button>
           </div>
