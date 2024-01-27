@@ -37,20 +37,24 @@ import {FormControl, ReactiveFormsModule} from "@angular/forms";
         border-radius: 0.8rem;
         padding-inline: 10px;
       }
+
       hr {
         border: none;
         border-top: 1px solid #e0e0e0;
         margin: 0 !important;
       }
+
       mat-button-toggle-group {
         border-radius: 0.8rem !important;
       }
+
       .filterSelectorWrapper {
         display: flex;
         justify-content: space-between;
         padding: 15px;
       }
-      @media screen and  (max-width: 600px) {
+
+      @media screen and (max-width: 600px) {
         .filterSelectorWrapper {
           flex-direction: column;
         }
