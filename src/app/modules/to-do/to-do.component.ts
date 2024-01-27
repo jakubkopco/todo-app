@@ -12,13 +12,14 @@ import {MatNativeDateModule} from "@angular/material/core";
 import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {ToDoItemModel} from "./models/toDoItem.model";
 import {Router} from "@angular/router";
-import {SupabaseService} from "../../shared/services/supabase.service";
+import {SupabaseService, UserModel} from "../../shared/services/supabase.service";
 import {ToDoService} from "./services/to-do.service";
 import {CommonModule} from "@angular/common";
 import {Session} from "@supabase/supabase-js";
 import {Subscriber} from "../../class/subscriber";
 import {AppRoutes} from "../../app.routes";
 import {CustomDialogService} from "../../shared/services/custom-dialog.service";
+import {lastValueFrom} from "rxjs";
 
 @Component({
   selector: 'app-to-do',
@@ -49,10 +50,7 @@ import {CustomDialogService} from "../../shared/services/custom-dialog.service";
 export class ToDoComponent extends Subscriber implements OnInit {
   toDoItems: ToDoItemModel[] = [];
   todoForm: FormGroup;
-  user: {
-    id: string;
-    email: string;
-  } | null = null;
+  user: UserModel| null = null;
   session: Session | null = this.supabase.session;
 
   constructor(readonly supabase: SupabaseService, private todoService: ToDoService, private formBuilder: FormBuilder,
@@ -87,18 +85,22 @@ export class ToDoComponent extends Subscriber implements OnInit {
 
   addItem() {
     if (this.todoForm.valid && this.user?.id) {
-      this.toDoItems = [...this.toDoItems,
-        {
-          created_at: new Date(),
-          owner: this.user?.id as string,
-          title: this.todoForm.value.title,
-          date: this.todoForm.value.date,
-          description: this.todoForm.value.description,
-          completed: this.todoForm.value.completed
+      lastValueFrom(this.todoService.createToDoItem(this.todoForm.value)).then(res => {
+        if (res.data) {
+          this.toDoItems = [...this.toDoItems,
+            {
+              id: res.data[0].id,
+              created_at: new Date(),
+              owner: this.user?.id as string,
+              title: this.todoForm.value.title,
+              date: this.todoForm.value.date,
+              description: this.todoForm.value.description,
+              completed: this.todoForm.value.completed
+            }
+          ];
+          this.todoForm.reset();
         }
-      ];
-      this.todoService.createToDoItem(this.todoForm.value);
-      this.todoForm.reset();
+      });
     } else {
       this.dialogService.openDialog({
         title: 'Error',

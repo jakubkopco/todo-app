@@ -6,12 +6,11 @@ import {MatIconButton} from "@angular/material/button";
 import {MatInput} from "@angular/material/input";
 import {ToDoItemModel, ToDoItemStatus} from "../../models/toDoItem.model";
 import {MatCheckbox} from "@angular/material/checkbox";
-import {ToDoService} from "../../services/to-do.service";
 import {CdkFixedSizeVirtualScroll, CdkVirtualForOf, CdkVirtualScrollViewport} from "@angular/cdk/scrolling";
 import {ToDoFilterSelectorComponent} from "../to-do-filter-selector/to-do-filter-selector.component";
-import {MatListItem} from "@angular/material/list";
 import {map, Observable, of} from "rxjs";
 import {Subscriber} from "../../../../class/subscriber";
+import {ToDoItemComponent} from "../to-do-item/to-do-item.component";
 
 @Component({
   selector: 'app-to-do-list',
@@ -27,7 +26,7 @@ import {Subscriber} from "../../../../class/subscriber";
     CdkFixedSizeVirtualScroll,
     CdkVirtualForOf,
     ToDoFilterSelectorComponent,
-    MatListItem
+    ToDoItemComponent
   ],
   templateUrl: './to-do-list.component.html',
   styleUrl: './to-do-list.component.scss'
@@ -46,7 +45,7 @@ export class ToDoListComponent extends Subscriber {
     }
   }
 
-  constructor(private readonly todoService: ToDoService) {
+  constructor() {
     super();
   }
 
@@ -57,28 +56,9 @@ export class ToDoListComponent extends Subscriber {
     ));
   }
 
-  changeItemStatus(checked: boolean, id: string) {
-    const item = this.toDoItems.find(item => item.id === id);
-    if (item) {
-      item.completed = checked;
-      this.subs.push(
-        this.todoService.updateToDoItem(item).subscribe(() => {
-          this.refreshItems();
-        })
-      );
-    }
-  }
-
-  deleteItem(id: string) {
-    const item = this.toDoItems.find(item => item.id === id);
-    if (item) {
-      this.subs.push(
-        this.todoService.deleteToDoItem(item).subscribe(() => {
-          this.toDoItems = this.toDoItems.filter(item => item.id !== id);
-          this.refreshItems();
-        })
-      );
-    }
+  deleteItem(itemId: string) {
+    this.toDoItems = this.toDoItems.filter(item => item.id !== itemId);
+    this.refreshItems();
   }
 
   filterItems(status: ToDoItemStatus) {

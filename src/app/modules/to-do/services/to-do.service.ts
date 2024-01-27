@@ -24,7 +24,7 @@ export class ToDoService {
     return from(this.supabaseService.client
       .from('Todo')
       .insert(item)
-      .then(() => { console.log('Success. Todo was created') }));
+      .select('id'));
   }
 
   updateToDoItem(item: ToDoItemModel) {

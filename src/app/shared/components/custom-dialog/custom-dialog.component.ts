@@ -8,6 +8,7 @@ import {
 } from "@angular/material/dialog";
 import {MatButton} from "@angular/material/button";
 import {DialogData} from "../../services/custom-dialog.service";
+
 @Component({
   selector: 'app-custom-dialog',
   standalone: true,
@@ -27,14 +28,15 @@ import {DialogData} from "../../services/custom-dialog.service";
       <button mat-raised-button mat-dialog-close>Close</button>
     </div>
   `,
-  styles: `
+  styles: [`
     .dialogButton {
       display: flex;
       justify-content: flex-end;
       padding: 24px;
     }
-  `
+  `]
 })
 export class CustomDialogComponent {
-  constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData) {
+  }
 }

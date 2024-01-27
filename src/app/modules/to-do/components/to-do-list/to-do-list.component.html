@@ -3,19 +3,12 @@
   (searchEmitter)="searchItems($event)">
 </app-to-do-filter-selector>
 <cdk-virtual-scroll-viewport itemSize="50">
-  <mat-list-item *cdkVirtualFor="let item of filteredToDoItems$ | async; let i = index">
-    <div class="headerOfItem">
-      <p class="titleWithDate">{{ item.title }} - {{ item.date | date: 'd.M.Y' }}</p>
-      <mat-icon (click)="deleteItem(item.id)">close</mat-icon>
-    </div>
-    <div class="descriptionWithCheckBox">
-      <p class="description">{{ item.description }}</p>
-      <mat-checkbox class="example-margin"
-                    [checked]="item.completed"
-                    color="primary"
-                    (change)="changeItemStatus($event.checked, item.id!)">
-      </mat-checkbox>
-    </div>
-  </mat-list-item>
+    <app-to-do-item
+      *cdkVirtualFor="let item of filteredToDoItems$ | async; let i = index"
+      [toDoItem]="item"
+      (deleteItemEmitter)="deleteItem($event)"
+      (refreshItemsEmitter)="refreshItems()"
+    >
+    </app-to-do-item>
 </cdk-virtual-scroll-viewport>
 

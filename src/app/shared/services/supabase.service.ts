@@ -3,13 +3,18 @@ import {AuthChangeEvent, AuthSession, createClient, Session, SupabaseClient} fro
 import {environment} from "../../../environments/environment";
 import {Subject} from "rxjs";
 
+export interface UserModel {
+  id: string;
+  email: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class SupabaseService {
   private readonly supabase: SupabaseClient;
   private _session: AuthSession | null = null;
-  protected userSessionSubject: Subject<{id: string, email: string} | null> = new Subject<{id: string, email: string } | null>();
+  protected userSessionSubject: Subject<UserModel | null> = new Subject<UserModel | null>();
 
   constructor() {
     this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);

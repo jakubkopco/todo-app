@@ -50,6 +50,19 @@ import {FormControl, ReactiveFormsModule} from "@angular/forms";
         justify-content: space-between;
         padding: 15px;
       }
+      @media screen and  (max-width: 600px) {
+        .filterSelectorWrapper {
+          flex-direction: column;
+        }
+        input {
+          height: 2.5rem;
+          margin-bottom: 10px;
+        }
+        mat-button-toggle {
+          display: flex;
+          width: 100%;
+        }
+      }
     `
   ]
 })
