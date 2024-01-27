@@ -2,7 +2,7 @@
   (selectedFilterEmitter)="filterItems($event)"
   (searchEmitter)="searchItems($event)">
 </app-to-do-filter-selector>
-<cdk-virtual-scroll-viewport itemSize="50">
+<cdk-virtual-scroll-viewport [itemSize]="toDoItems.length">
     <app-to-do-item
       *cdkVirtualFor="let item of filteredToDoItems$ | async; let i = index"
       [toDoItem]="item"
