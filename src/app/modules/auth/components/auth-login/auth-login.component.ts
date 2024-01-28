@@ -1,6 +1,6 @@
 import {Component, effect} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import {MatFormField, MatLabel} from "@angular/material/form-field";
+import {MatError, MatFormField, MatLabel} from "@angular/material/form-field";
 import {MatCard, MatCardContent, MatCardHeader, MatCardTitle} from "@angular/material/card";
 import {AuthService} from "../../services/auth.service";
 import {MatInput} from "@angular/material/input";
@@ -21,6 +21,7 @@ import {MatProgressSpinner} from "@angular/material/progress-spinner";
     MatCardHeader,
     MatLabel,
     MatCard,
+    MatError,
     ReactiveFormsModule,
     MatInput,
     MatButton,
