@@ -1,15 +1,12 @@
 @if (user) {
-  <div class="wrappedContainer">
-    <mat-toolbar color="primary">
-      <h3>todo app - {{ user.email }}</h3>
-      <mat-icon (click)="signOut()">logout</mat-icon>
-    </mat-toolbar>
+  <div class="wrapped-container">
+    <app-to-do-toolbar [userEmail]="user.email"></app-to-do-toolbar>
     <div class="wrappedForm">
       <form [formGroup]="todoForm">
         <div style="display: flex;">
-          <mat-form-field class="example-full-width titleFormField">
+          <mat-form-field class="example-full-width title-form-field">
             <mat-label>Title</mat-label>
-            <input matInput formControlName="title">
+            <input matInput appAlphanumericOnly formControlName="title">
           </mat-form-field>
           <mat-form-field>
             <mat-label>Choose a date</mat-label>
@@ -19,11 +16,11 @@
           </mat-form-field>
         </div>
         <div style="display: flex;">
-          <mat-form-field class="example-full-width descriptionField">
+          <mat-form-field class="example-full-width description-field">
             <mat-label>Description</mat-label>
             <textarea matInput formControlName="description"></textarea>
           </mat-form-field>
-          <div class="styledButton">
+          <div class="styled-button">
             <button class="mat-primary" mat-icon-button (click)="addItem()">
               <mat-icon>send</mat-icon>
             </button>

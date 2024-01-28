@@ -24,12 +24,12 @@ import {DialogData} from "../../services/custom-dialog.service";
     <div mat-dialog-content>
       {{ data.message }}
     </div>
-    <div class="dialogButton" mat-dialog-actions>
+    <div class="dialog-button" mat-dialog-actions>
       <button mat-raised-button mat-dialog-close>Close</button>
     </div>
   `,
   styles: [`
-    .dialogButton {
+    .dialog-button {
       display: flex;
       justify-content: flex-end;
       padding: 24px;
@@ -37,6 +37,6 @@ import {DialogData} from "../../services/custom-dialog.service";
   `]
 })
 export class CustomDialogComponent {
-  constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData) {
+  constructor(@Inject(MAT_DIALOG_DATA) public readonly data: DialogData) {
   }
 }

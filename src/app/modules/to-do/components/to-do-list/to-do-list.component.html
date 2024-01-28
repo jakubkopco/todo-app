@@ -1,6 +1,6 @@
 <app-to-do-filter-selector
-  (selectedFilterEmitter)="filterItems($event)"
-  (searchEmitter)="searchItems($event)">
+  (selectFilter)="filterItems($event)"
+  (search)="searchItems($event)">
 </app-to-do-filter-selector>
 <cdk-virtual-scroll-viewport [itemSize]="toDoItems.length">
     <app-to-do-item

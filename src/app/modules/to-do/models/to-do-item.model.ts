@@ -11,5 +11,5 @@ export interface ToDoItemModel {
 export enum ToDoItemStatus {
   All = 'all',
   Completed = 'completed',
-  InProgress = 'inProgress'
+  In_Progress = 'in_progress'
 }

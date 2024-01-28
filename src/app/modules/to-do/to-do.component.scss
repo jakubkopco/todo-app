@@ -6,17 +6,13 @@ mat-toolbar {
   border-radius: 0.8rem 0.8rem 0 0;
 }
 
-.wrappedContainer {
+.wrapped-container {
   width: 100%;
   max-width: 1200px;
   margin: 2rem auto;
   border-radius: 0.8rem;
   background: white;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 2px 10px 0 rgba(0, 0, 0, 0.19);
-}
-
-mat-icon {
-  cursor: pointer;
 }
 
 form {
@@ -33,29 +29,26 @@ button {
   padding: 1rem;
 }
 
-.titleFormField {
+.title-form-field {
   display: block;
   width: 40%;
   margin-right: 10px;
 }
 
-.styledButton {
+.styled-button {
   display: flex;
   height: auto;
   align-items: center;
   padding: 0 1rem 1rem 1rem;
 }
 
-.descriptionField {
+.description-field {
   display: flex;
   width: 100%;
 }
 
 @media screen and (max-width: 1200px) {
-  mat-toolbar {
-    border-radius: 0;
-  }
-  .wrappedContainer {
+  .wrapped-container {
     margin: 0 auto;
   }
 }

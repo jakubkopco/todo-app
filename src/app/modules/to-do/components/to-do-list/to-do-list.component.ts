@@ -4,12 +4,11 @@ import {MatIcon} from "@angular/material/icon";
 import {CommonModule} from "@angular/common";
 import {MatIconButton} from "@angular/material/button";
 import {MatInput} from "@angular/material/input";
-import {ToDoItemModel, ToDoItemStatus} from "../../models/toDoItem.model";
+import {ToDoItemModel, ToDoItemStatus} from "../../models/to-do-item.model";
 import {MatCheckbox} from "@angular/material/checkbox";
 import {CdkFixedSizeVirtualScroll, CdkVirtualForOf, CdkVirtualScrollViewport} from "@angular/cdk/scrolling";
 import {ToDoFilterSelectorComponent} from "../to-do-filter-selector/to-do-filter-selector.component";
 import {map, Observable, of} from "rxjs";
-import {Subscriber} from "../../../../class/subscriber";
 import {ToDoItemComponent} from "../to-do-item/to-do-item.component";
 
 @Component({
@@ -31,10 +30,10 @@ import {ToDoItemComponent} from "../to-do-item/to-do-item.component";
   templateUrl: './to-do-list.component.html',
   styleUrl: './to-do-list.component.scss'
 })
-export class ToDoListComponent extends Subscriber {
-  public toDoItems: ToDoItemModel[] = [];
+export class ToDoListComponent {
+  protected toDoItems: ToDoItemModel[] = [];
   private selectedFilter: ToDoItemStatus = ToDoItemStatus.All;
-  public filteredToDoItems$: Observable<ToDoItemModel[]> | undefined;
+  protected filteredToDoItems$: Observable<ToDoItemModel[]> | undefined;
   private searchQuery: string = '';
 
   @Input('toDoItems')
@@ -43,10 +42,6 @@ export class ToDoListComponent extends Subscriber {
       this.toDoItems = items;
       this.filterItems(this.selectedFilter);
     }
-  }
-
-  constructor() {
-    super();
   }
 
   searchItems(query: string) {
@@ -65,7 +60,7 @@ export class ToDoListComponent extends Subscriber {
     this.selectedFilter = status;
     this.searchItems(this.searchQuery);
     switch (status) {
-      case ToDoItemStatus.InProgress:
+      case ToDoItemStatus.In_Progress:
         this.filteredToDoItems$ = this.filteredToDoItems$?.pipe(
           map(items => items.filter(item => !item.completed))
         );

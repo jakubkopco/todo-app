@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {SupabaseService} from "../../../shared/services/supabase.service";
 import {from, map, Observable} from "rxjs";
-import {ToDoItemModel} from "../models/toDoItem.model";
+import {ToDoItemModel} from "../models/to-do-item.model";
 
 @Injectable({
   providedIn: 'root'
@@ -43,5 +43,9 @@ export class ToDoService {
       .eq('owner', item.owner)
       .eq('id', item.id)
       .then(() => { console.log('Success. Todo was deleted') }));
+  }
+
+  getSortedToDoItems(items: ToDoItemModel[]){
+    return items.sort((a: ToDoItemModel, b: ToDoItemModel) => a.created_at < b.created_at ? -1 : 1);
   }
 }

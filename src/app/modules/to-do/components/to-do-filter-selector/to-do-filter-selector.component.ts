@@ -1,7 +1,8 @@
 import {Component, EventEmitter, Output} from '@angular/core';
-import {ToDoItemStatus} from "../../models/toDoItem.model";
+import {ToDoItemStatus} from "../../models/to-do-item.model";
 import {MatButtonToggle, MatButtonToggleGroup} from "@angular/material/button-toggle";
 import {FormControl, ReactiveFormsModule} from "@angular/forms";
+import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 
 @Component({
   selector: 'app-to-do-filter-selector',
@@ -13,18 +14,18 @@ import {FormControl, ReactiveFormsModule} from "@angular/forms";
   ],
   template: `
     <hr>
-    <div class="filterSelectorWrapper">
+    <div class="filter-selector-wrapper">
       <input type="text" [formControl]="searchControl" placeholder="Search...">
       <mat-button-toggle-group name="selectedFilter" aria-label="Selected filter"
-                               [value]="ToDoItemStatusModel.All">
-        <mat-button-toggle [value]="ToDoItemStatusModel.All"
-                           (click)="selectFilter(ToDoItemStatusModel.All)">All
+                               [value]="ToDoItemStatus.All">
+        <mat-button-toggle [value]="ToDoItemStatus.All"
+                           (click)="selectFilter.emit(ToDoItemStatus.All)">All
         </mat-button-toggle>
-        <mat-button-toggle [value]="ToDoItemStatusModel.InProgress"
-                           (click)="selectFilter(ToDoItemStatusModel.InProgress)">In progress
+        <mat-button-toggle [value]="ToDoItemStatus.In_Progress"
+                           (click)="selectFilter.emit(ToDoItemStatus.In_Progress)">In progress
         </mat-button-toggle>
-        <mat-button-toggle [value]="ToDoItemStatusModel.Completed"
-                           (click)="selectFilter(ToDoItemStatusModel.Completed)">Completed
+        <mat-button-toggle [value]="ToDoItemStatus.Completed"
+                           (click)="selectFilter.emit(ToDoItemStatus.Completed)">Completed
         </mat-button-toggle>
       </mat-button-toggle-group>
     </div>
@@ -48,14 +49,14 @@ import {FormControl, ReactiveFormsModule} from "@angular/forms";
         border-radius: 0.8rem !important;
       }
 
-      .filterSelectorWrapper {
+      .filter-selector-wrapper {
         display: flex;
         justify-content: space-between;
         padding: 15px;
       }
 
       @media screen and (max-width: 600px) {
-        .filterSelectorWrapper {
+        .filter-selector-wrapper {
           flex-direction: column;
         }
         input {
@@ -71,16 +72,12 @@ import {FormControl, ReactiveFormsModule} from "@angular/forms";
   ]
 })
 export class ToDoFilterSelectorComponent {
-  public searchControl: FormControl = new FormControl();
-  protected readonly ToDoItemStatusModel = ToDoItemStatus;
-  @Output() selectedFilterEmitter: EventEmitter<ToDoItemStatus> = new EventEmitter();
-  @Output() searchEmitter: EventEmitter<string> = new EventEmitter();
+  protected readonly searchControl: FormControl = new FormControl();
+  protected readonly ToDoItemStatus = ToDoItemStatus;
+  @Output() selectFilter: EventEmitter<ToDoItemStatus> = new EventEmitter();
+  @Output() search: EventEmitter<string> = new EventEmitter();
 
   constructor() {
-    this.searchControl.valueChanges.subscribe(value => this.searchEmitter.emit(value));
-  }
-
-  selectFilter(status: ToDoItemStatus) {
-    this.selectedFilterEmitter.emit(status);
+    this.searchControl.valueChanges.pipe(takeUntilDestroyed()).subscribe(value => this.search.emit(value));
   }
 }

@@ -29,8 +29,8 @@ import {MatProgressSpinner} from "@angular/material/progress-spinner";
   styleUrls: ['./auth-login.component.scss']
 })
 export class AuthLoginComponent {
-  loading = false;
-  signInForm: FormGroup;
+  protected loading = false;
+  readonly signInForm: FormGroup;
 
   constructor(
     private readonly supabase: AuthService,
