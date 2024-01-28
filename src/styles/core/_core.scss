@@ -1,0 +1,12 @@
+@use '@angular/material' as mat;
+@use '../theme';
+
+@mixin styles-and-theme() {
+  $theme-config: theme.$theme-config;
+  $typography-config: mat.get-typography-config($theme-config);
+  $color-config: mat.get-color-config($theme-config);
+
+  @include mat.core();
+  @include mat.core-theme($theme-config);
+  @include mat.all-component-themes($theme-config);
+}

@@ -29,8 +29,7 @@ import { ToDoItemComponent } from '../to-do-item/to-do-item.component';
     ToDoFilterSelectorComponent,
     ToDoItemComponent
   ],
-  templateUrl: './to-do-list.component.html',
-  styleUrl: './to-do-list.component.scss'
+  templateUrl: './to-do-list.component.html'
 })
 export class ToDoListComponent {
   private readonly toDoItems = inject(ToDoStateService).toDoItems;

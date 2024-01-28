@@ -39,10 +39,6 @@ import { ToDoItemStatus } from '../../models/to-do-item.model';
         margin: 0 !important;
       }
 
-      mat-button-toggle-group {
-        border-radius: 0.8rem !important;
-      }
-
       .filter-selector-wrapper {
         display: flex;
         justify-content: space-between;
@@ -53,13 +49,10 @@ import { ToDoItemStatus } from '../../models/to-do-item.model';
         .filter-selector-wrapper {
           flex-direction: column;
         }
+
         input {
           height: 2.5rem;
           margin-bottom: 10px;
-        }
-        mat-button-toggle {
-          display: flex;
-          width: 100%;
         }
       }
     `

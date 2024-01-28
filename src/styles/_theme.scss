@@ -1,0 +1,23 @@
+@use '@angular/material' as mat;
+
+@use 'palette';
+
+$my-custom-typography-config: mat.define-typography-config(
+  $headline-1: mat.define-typography-level(112px, 112px, 300, $letter-spacing: -0.05em),
+  $headline-2: mat.define-typography-level(56px, 56px, 400, $letter-spacing: -0.02em),
+  $headline-3: mat.define-typography-level(45px, 48px, 400, $letter-spacing: -0.005em),
+  $headline-4: mat.define-typography-level(34px, 40px, 400),
+  $headline-5: mat.define-typography-level(24px, 32px, 400)
+);
+
+$theme-config: mat.define-light-theme(
+  (
+    color: (
+      primary: palette.$my-primary,
+      accent: palette.$my-accent,
+      warn: palette.$my-warn
+    ),
+    typography: $my-custom-typography-config,
+    density: 0
+  )
+);

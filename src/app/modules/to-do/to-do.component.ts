@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MatIconButton } from '@angular/material/button';
+import { MatFabButton } from '@angular/material/button';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepicker, MatDatepickerModule, MatDatepickerToggle } from '@angular/material/datepicker';
 import { MatFormField, MatFormFieldModule, MatHint, MatLabel } from '@angular/material/form-field';
@@ -29,7 +29,6 @@ interface ToDoForm {
     MatFormField,
     MatIcon,
     MatInput,
-    MatIconButton,
     MatList,
     MatListItem,
     MatLabel,
@@ -44,7 +43,8 @@ interface ToDoForm {
     ReactiveFormsModule,
     CommonModule,
     ToDoToolbarComponent,
-    AlphanumericOnlyDirective
+    AlphanumericOnlyDirective,
+    MatFabButton
   ],
   templateUrl: './to-do.component.html',
   styleUrl: './to-do.component.scss'

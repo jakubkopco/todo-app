@@ -1,0 +1,5 @@
+@use 'virtual-scroll-component';
+
+@mixin styles() {
+  @include virtual-scroll-component.styles();
+}

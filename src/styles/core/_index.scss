@@ -1,0 +1,5 @@
+@use 'core';
+
+@mixin styles() {
+  @include core.styles-and-theme();
+}

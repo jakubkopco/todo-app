@@ -1,0 +1,17 @@
+@use 'spinner';
+@use 'icon';
+@use 'card';
+@use 'form-field';
+@use 'list';
+@use 'virtual-scroll';
+@use 'toolbar';
+
+@mixin all-component-styles() {
+  @include spinner.styles();
+  @include icon.styles();
+  @include card.styles();
+  @include form-field.styles();
+  @include list.styles();
+  @include virtual-scroll.styles();
+  @include toolbar.styles();
+}

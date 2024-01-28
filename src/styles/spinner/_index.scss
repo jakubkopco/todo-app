@@ -1,0 +1,5 @@
+@use 'spinner-component';
+
+@mixin styles() {
+  @include spinner-component.styles();
+}

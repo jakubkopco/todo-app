@@ -1,7 +1,7 @@
 import { Component, effect } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
-import { MatCard, MatCardContent, MatCardHeader, MatCardTitle } from '@angular/material/card';
+import { MatCard, MatCardActions, MatCardContent, MatCardHeader, MatCardTitle } from '@angular/material/card';
 import { MatError, MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
@@ -26,7 +26,8 @@ import { AuthService } from '../../services/auth.service';
     ReactiveFormsModule,
     MatInput,
     MatButton,
-    MatProgressSpinner
+    MatProgressSpinner,
+    MatCardActions
   ],
   styleUrls: ['./auth-login.component.scss']
 })

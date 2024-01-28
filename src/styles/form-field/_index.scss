@@ -1,0 +1,5 @@
+@use 'form-field-component';
+
+@mixin styles() {
+  @include form-field-component.styles();
+}

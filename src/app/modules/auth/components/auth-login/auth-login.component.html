@@ -1,5 +1,5 @@
 @if (!loading) {
-  <div class="login-card">
+  <div class="container">
     <mat-card>
       <mat-card-header>
         <mat-card-title>Log in</mat-card-title>
@@ -32,16 +32,16 @@
               <mat-error> Password must be at least 8 characters long. </mat-error>
             }
           </mat-form-field>
-          <div class="wrapped-buttons">
-            <button mat-raised-button class="button" [disabled]="loading" (click)="signIn()">
-              {{ loading ? 'Loading' : 'Sign In' }}
-            </button>
-            <button mat-raised-button type="submit" class="button" [disabled]="loading" (click)="signUp()">
-              {{ loading ? 'Loading' : 'Sign Up' }}
-            </button>
-          </div>
         </form>
       </mat-card-content>
+      <mat-card-actions class="full-width">
+        <button mat-raised-button class="button" color="accent" [disabled]="loading" (click)="signIn()">
+          {{ loading ? 'Loading' : 'Sign In' }}
+        </button>
+        <button mat-raised-button type="submit" class="button" color="primary" [disabled]="loading" (click)="signUp()">
+          {{ loading ? 'Loading' : 'Sign Up' }}
+        </button>
+      </mat-card-actions>
     </mat-card>
   </div>
 } @else {

@@ -1,0 +1,28 @@
+@mixin styles() {
+  mat-card {
+    max-width: 400px;
+    width: 100%;
+    margin: 30px;
+    border-radius: 0.8rem !important;
+    mat-card-header {
+      display: flex;
+      padding-bottom: 20px;
+      justify-content: center;
+    }
+
+    mat-card-actions {
+      button {
+        border-radius: 0.4rem !important;
+      }
+
+      &.full-width {
+        display: flex;
+        gap: 1rem;
+
+        button {
+          width: 100%;
+        }
+      }
+    }
+  }
+}

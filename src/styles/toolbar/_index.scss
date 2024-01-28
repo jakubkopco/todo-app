@@ -1,0 +1,5 @@
+@use 'toolbar-component';
+
+@mixin styles() {
+  @include toolbar-component.styles();
+}

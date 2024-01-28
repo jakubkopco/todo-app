@@ -1,0 +1,5 @@
+@use 'icon-component';
+
+@mixin styles() {
+  @include icon-component.styles();
+}

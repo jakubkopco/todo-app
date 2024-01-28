@@ -1,0 +1,5 @@
+@use 'list-component';
+
+@mixin styles() {
+  @include list-component.styles();
+}

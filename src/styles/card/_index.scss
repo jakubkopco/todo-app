@@ -1,0 +1,5 @@
+@use 'card-component';
+
+@mixin styles() {
+  @include card-component.styles();
+}

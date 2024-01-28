@@ -1,55 +1,11 @@
-.login-card {
+.container {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
 
-  mat-card {
-    max-width: 400px;
-    width: 100%;
-    margin: 30px;
-  }
-
   .login-form {
     display: flex;
     flex-direction: column;
-
-    mat-form-field {
-      margin-bottom: 20px;
-    }
-
-    button {
-      border-radius: 0.8rem;
-      margin-top: 10px;
-    }
   }
-}
-
-mat-card {
-  border-radius: 0.8rem;
-  box-shadow:
-    0 2px 4px 0 rgba(0, 0, 0, 0.2),
-    0 4px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
-mat-card-header {
-  display: flex;
-  padding-bottom: 20px;
-  justify-content: center;
-}
-
-.mat-mdc-form-field-subscript-wrapper {
-  display: none !important;
-}
-
-.wrapped-buttons {
-  display: flex;
-  width: 100%;
-}
-
-button {
-  display: flex;
-  width: 100%;
-  margin: 5px;
-  font-size: 16px;
 }

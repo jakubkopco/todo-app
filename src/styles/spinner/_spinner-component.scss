@@ -1,0 +1,6 @@
+@mixin styles() {
+  mat-spinner {
+    margin: 50vh auto 0;
+    transform: translateY(-50%);
+  }
+}

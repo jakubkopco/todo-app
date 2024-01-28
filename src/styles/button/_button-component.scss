@@ -1,0 +1,11 @@
+@mixin styles() {
+  mat-button-toggle-group {
+    border-radius: 0.8rem !important;
+  }
+  @media screen and (max-width: 600px) {
+    mat-button-toggle {
+      display: flex;
+      width: 100%;
+    }
+  }
+}

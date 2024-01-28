@@ -30,23 +30,6 @@ import { ToDoItemDTO } from '../../models/to-do-item.model';
         font-family: Monaco, 'Lucida Console', monospace;
       }
 
-      mat-icon {
-        width: 40px;
-        display: flex;
-        justify-content: center;
-        cursor: pointer;
-      }
-
-      mat-list-item {
-        display: block;
-        margin: 1rem;
-        height: 100%;
-        box-shadow:
-          0 2px 4px 0 rgba(0, 0, 0, 0.2),
-          0 4px 20px 0 rgba(0, 0, 0, 0.19);
-        border-radius: 0.8rem;
-      }
-
       .title-with-date {
         margin: 0;
         font-size: 22px;

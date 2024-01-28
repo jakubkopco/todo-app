@@ -20,23 +20,7 @@ import { AuthService } from '../../../auth/services/auth.service';
       </h3>
       <mat-icon (click)="signOut()">logout</mat-icon>
     </mat-toolbar>
-  `,
-  styles: [
-    `
-      mat-toolbar {
-        display: flex;
-        width: 100%;
-        justify-content: space-between;
-        padding: 1rem;
-        border-radius: 0.8rem 0.8rem 0 0;
-      }
-      @media screen and (max-width: 1200px) {
-        mat-toolbar {
-          border-radius: 0;
-        }
-      }
-    `
-  ]
+  `
 })
 export class ToDoToolbarComponent {
   protected readonly userEmail = this.auth.user()?.email;
