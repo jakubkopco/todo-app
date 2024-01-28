@@ -1,15 +1,16 @@
-import {Component, Input} from '@angular/core';
-import {MatLabel} from "@angular/material/form-field";
-import {MatIcon} from "@angular/material/icon";
-import {CommonModule} from "@angular/common";
-import {MatIconButton} from "@angular/material/button";
-import {MatInput} from "@angular/material/input";
-import {ToDoItemModel, ToDoItemStatus} from "../../models/to-do-item.model";
-import {MatCheckbox} from "@angular/material/checkbox";
-import {CdkFixedSizeVirtualScroll, CdkVirtualForOf, CdkVirtualScrollViewport} from "@angular/cdk/scrolling";
-import {ToDoFilterSelectorComponent} from "../to-do-filter-selector/to-do-filter-selector.component";
-import {map, Observable, of} from "rxjs";
-import {ToDoItemComponent} from "../to-do-item/to-do-item.component";
+import { CdkFixedSizeVirtualScroll, CdkVirtualForOf, CdkVirtualScrollViewport, ScrollingModule } from '@angular/cdk/scrolling';
+import { CommonModule } from '@angular/common';
+import { Component, computed, inject, signal } from '@angular/core';
+import { MatIconButton } from '@angular/material/button';
+import { MatCheckbox } from '@angular/material/checkbox';
+import { MatLabel } from '@angular/material/form-field';
+import { MatIcon } from '@angular/material/icon';
+import { MatInput } from '@angular/material/input';
+
+import { ToDoItemDTO, ToDoItemStatus } from '../../models/to-do-item.model';
+import { ToDoStateService } from '../../services/to-do-state.service';
+import { ToDoFilterSelectorComponent } from '../to-do-filter-selector/to-do-filter-selector.component';
+import { ToDoItemComponent } from '../to-do-item/to-do-item.component';
 
 @Component({
   selector: 'app-to-do-list',
@@ -24,6 +25,7 @@ import {ToDoItemComponent} from "../to-do-item/to-do-item.component";
     CdkVirtualScrollViewport,
     CdkFixedSizeVirtualScroll,
     CdkVirtualForOf,
+    ScrollingModule,
     ToDoFilterSelectorComponent,
     ToDoItemComponent
   ],
@@ -31,51 +33,43 @@ import {ToDoItemComponent} from "../to-do-item/to-do-item.component";
   styleUrl: './to-do-list.component.scss'
 })
 export class ToDoListComponent {
-  protected toDoItems: ToDoItemModel[] = [];
-  private selectedFilter: ToDoItemStatus = ToDoItemStatus.All;
-  protected filteredToDoItems$: Observable<ToDoItemModel[]> | undefined;
-  private searchQuery: string = '';
+  private readonly toDoItems = inject(ToDoStateService).toDoItems;
+  private readonly todoService = inject(ToDoStateService);
+  private readonly selectedFilter = signal<ToDoItemStatus>(ToDoItemStatus.All);
+  private readonly searchQuery = signal<string>('');
 
-  @Input('toDoItems')
-  set setToDoItems(items: ToDoItemModel[]) {
-    if (items) {
-      this.toDoItems = items;
-      this.filterItems(this.selectedFilter);
+  protected itemSize = computed(() => this.toDoItems().length);
+  protected filteredToDoItems = computed(() => {
+    const items = this.toDoItems().filter(
+      item => item.title.toLowerCase().includes(this.searchQuery()) || item.description.toLowerCase().includes(this.searchQuery())
+    );
+    switch (this.selectedFilter()) {
+      case ToDoItemStatus.In_Progress:
+        return items.filter(item => !item.completed);
+      case ToDoItemStatus.Completed:
+        return items.filter(item => item.completed);
+      default:
+        return items;
     }
-  }
+  });
 
   searchItems(query: string) {
-    this.searchQuery = query.toLowerCase().trim();
-    this.filteredToDoItems$ = of(this.toDoItems.filter(item =>
-      item.title.toLowerCase().includes(this.searchQuery) || item.description.toLowerCase().includes(this.searchQuery)
-    ));
-  }
-
-  deleteItem(itemId: string) {
-    this.toDoItems = this.toDoItems.filter(item => item.id !== itemId);
-    this.refreshItems();
+    this.searchQuery.set(query.toLowerCase().trim());
   }
 
   filterItems(status: ToDoItemStatus) {
-    this.selectedFilter = status;
-    this.searchItems(this.searchQuery);
-    switch (status) {
-      case ToDoItemStatus.In_Progress:
-        this.filteredToDoItems$ = this.filteredToDoItems$?.pipe(
-          map(items => items.filter(item => !item.completed))
-        );
-        break;
-      case ToDoItemStatus.Completed:
-        this.filteredToDoItems$ = this.filteredToDoItems$?.pipe(
-          map(items => items.filter(item => item.completed))
-        );
-        break;
-    }
+    this.selectedFilter.set(status);
+    this.searchItems(this.searchQuery());
+  }
+  async onUpdateItem(item: ToDoItemDTO): Promise<void> {
+    await this.todoService.updateToDoItem(item);
   }
 
-  refreshItems() {
-    setTimeout(() => {
-      this.filterItems(this.selectedFilter);
-    }, 300);
+  async onDeleteItem(item: ToDoItemDTO): Promise<void> {
+    await this.todoService.deleteToDoItem(item);
+  }
+
+  trackByFn(index: number, item: ToDoItemDTO) {
+    return item.id;
   }
 }

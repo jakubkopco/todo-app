@@ -1,5 +1,12 @@
-export interface ToDoItemModel {
-  id?: string;
+export interface ToDoItemForm {
+  title: string;
+  description: string;
+  date: Date;
+  completed: boolean;
+}
+
+export interface ToDoItemDTO {
+  id: string;
   created_at: Date;
   owner: string;
   title: string;

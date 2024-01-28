@@ -1,5 +1,6 @@
-import {Injectable, signal} from '@angular/core'
-import {SupabaseService} from "../../../shared/services/supabase.service";
+import { Injectable, signal } from '@angular/core';
+
+import { SupabaseService, UserModel } from '../../../shared/services/supabase.service';
 
 export interface AuthFormModel {
   email: string;
@@ -7,13 +8,20 @@ export interface AuthFormModel {
 }
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class AuthService {
   readonly isLogged = signal(false);
+  readonly user = signal<UserModel | null>(null);
 
-  constructor(private readonly supabase: SupabaseService) {
-    this.supabase.authChanges((event) => {
+  constructor(private readonly supabase: SupabaseService) {}
+
+  fetchUserFromSession(): void {
+    this.supabase.authChanges((event, session) => {
+      this.user.set({
+        id: session?.user?.id as string,
+        email: session?.user?.email as string
+      });
       this.isLogged.set(event === 'SIGNED_IN');
     });
   }
@@ -28,7 +36,7 @@ export class AuthService {
       options: {
         emailRedirectTo: 'https://localhost:4200/todo'
       }
-    })
+    });
   }
 
   signOut() {

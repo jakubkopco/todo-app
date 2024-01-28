@@ -1,35 +1,29 @@
-import {Component, EventEmitter, Output} from '@angular/core';
-import {ToDoItemStatus} from "../../models/to-do-item.model";
-import {MatButtonToggle, MatButtonToggleGroup} from "@angular/material/button-toggle";
-import {FormControl, ReactiveFormsModule} from "@angular/forms";
-import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
+import { Component, EventEmitter, Output } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { MatButtonToggle, MatButtonToggleGroup } from '@angular/material/button-toggle';
+
+import { ToDoItemStatus } from '../../models/to-do-item.model';
 
 @Component({
   selector: 'app-to-do-filter-selector',
   standalone: true,
-  imports: [
-    MatButtonToggleGroup,
-    MatButtonToggle,
-    ReactiveFormsModule
-  ],
+  imports: [MatButtonToggleGroup, MatButtonToggle, ReactiveFormsModule],
   template: `
-    <hr>
+    <hr />
     <div class="filter-selector-wrapper">
-      <input type="text" [formControl]="searchControl" placeholder="Search...">
-      <mat-button-toggle-group name="selectedFilter" aria-label="Selected filter"
-                               [value]="ToDoItemStatus.All">
-        <mat-button-toggle [value]="ToDoItemStatus.All"
-                           (click)="selectFilter.emit(ToDoItemStatus.All)">All
+      <input type="text" [formControl]="searchControl" placeholder="Search..." />
+      <mat-button-toggle-group name="selectedFilter" aria-label="Selected filter" [value]="toDoItemStatus.All">
+        <mat-button-toggle [value]="toDoItemStatus.All" (click)="selectFilter.emit(toDoItemStatus.All)">All </mat-button-toggle>
+        <mat-button-toggle [value]="toDoItemStatus.In_Progress" (click)="selectFilter.emit(toDoItemStatus.In_Progress)"
+          >In progress
         </mat-button-toggle>
-        <mat-button-toggle [value]="ToDoItemStatus.In_Progress"
-                           (click)="selectFilter.emit(ToDoItemStatus.In_Progress)">In progress
-        </mat-button-toggle>
-        <mat-button-toggle [value]="ToDoItemStatus.Completed"
-                           (click)="selectFilter.emit(ToDoItemStatus.Completed)">Completed
+        <mat-button-toggle [value]="toDoItemStatus.Completed" (click)="selectFilter.emit(toDoItemStatus.Completed)"
+          >Completed
         </mat-button-toggle>
       </mat-button-toggle-group>
     </div>
-    <hr>
+    <hr />
   `,
   styles: [
     `
@@ -73,9 +67,9 @@ import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 })
 export class ToDoFilterSelectorComponent {
   protected readonly searchControl: FormControl = new FormControl();
-  protected readonly ToDoItemStatus = ToDoItemStatus;
-  @Output() selectFilter: EventEmitter<ToDoItemStatus> = new EventEmitter();
-  @Output() search: EventEmitter<string> = new EventEmitter();
+  protected readonly toDoItemStatus = ToDoItemStatus;
+  @Output() selectFilter = new EventEmitter<ToDoItemStatus>();
+  @Output() search = new EventEmitter<string>();
 
   constructor() {
     this.searchControl.valueChanges.pipe(takeUntilDestroyed()).subscribe(value => this.search.emit(value));

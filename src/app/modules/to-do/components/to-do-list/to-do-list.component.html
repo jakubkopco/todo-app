@@ -1,13 +1,10 @@
-<app-to-do-filter-selector
-  (selectFilter)="filterItems($event)"
-  (search)="searchItems($event)">
-</app-to-do-filter-selector>
-<cdk-virtual-scroll-viewport [itemSize]="toDoItems.length">
-    <app-to-do-item
-      *cdkVirtualFor="let item of filteredToDoItems$ | async; let i = index"
-      [toDoItem]="item"
-      (deleteItemEmitter)="deleteItem($event)"
-      (refreshItemsEmitter)="refreshItems()">
-    </app-to-do-item>
+<app-to-do-filter-selector (selectFilter)="filterItems($event)" (search)="searchItems($event)"> </app-to-do-filter-selector>
+<cdk-virtual-scroll-viewport [itemSize]="itemSize()">
+  <app-to-do-item
+    *cdkVirtualFor="let item of filteredToDoItems(); trackBy: trackByFn"
+    [toDoItem]="item"
+    (deleteItem)="onDeleteItem($event)"
+    (updateItem)="onUpdateItem($event)"
+  >
+  </app-to-do-item>
 </cdk-virtual-scroll-viewport>
-

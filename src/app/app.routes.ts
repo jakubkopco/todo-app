@@ -1,23 +1,25 @@
-import {Routes} from '@angular/router';
-import {authGuard} from "./shared/guards/auth.guard";
+import { Routes } from '@angular/router';
+
+import { authGuard } from './shared/guards/auth.guard';
 
 export const AppRoutes = {
-  Auth: 'auth',
-  ToDo: 'todo'
-}
+  auth: 'auth',
+  todo: 'todo'
+};
 
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: AppRoutes.Auth,
-    pathMatch: 'full',
+    redirectTo: AppRoutes.auth,
+    pathMatch: 'full'
   },
   {
-    path: AppRoutes.Auth,
-    loadChildren: () => import('./modules/auth/auth.module').then(m => m.AuthModule),
+    path: AppRoutes.auth,
+    loadComponent: () => import('./modules/auth/components/auth-login/auth-login.component').then(m => m.AuthLoginComponent)
   },
   {
-    path: AppRoutes.ToDo,
-    loadChildren: () => import('./modules/to-do/to-do.module').then(m => m.ToDoModule),
+    path: AppRoutes.todo,
+    loadComponent: () => import('./modules/to-do/to-do.component').then(m => m.ToDoComponent),
     canActivate: [authGuard]
-  }];
+  }
+];

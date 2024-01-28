@@ -8,48 +8,35 @@
         <form class="login-form" [formGroup]="signInForm">
           <mat-form-field appearance="fill">
             <mat-label>E-mail</mat-label>
-            <input matInput
-                   id="email"
-                   formControlName="email"
-                   class="inputField"
-                   type="email"
-                   placeholder="Your email">
-            @if (signInForm.get('email')?.hasError('required')){
-              <mat-error>
-                Please enter your email.
-              </mat-error>
-            } @else if (signInForm.get('email')?.hasError('email')){
-              <mat-error>
-                Please enter a valid email address.
-              </mat-error>
+            <input matInput id="email" formControlName="email" class="inputField" type="email" placeholder="Your email" />
+            @if (signInForm.get('email')?.hasError('required')) {
+              <mat-error> Please enter your email. </mat-error>
+            } @else if (signInForm.get('email')?.hasError('email')) {
+              <mat-error> Please enter a valid email address. </mat-error>
             }
           </mat-form-field>
           <mat-form-field appearance="fill">
             <mat-label>Password</mat-label>
-            <input matInput
-                   id="password"
-                   formControlName="password"
-                   class="inputField"
-                   type="password"
-                   placeholder="Your password"
-                   autocomplete="true">
-            @if (signInForm.get('password')?.hasError('required')){
-              <mat-error>
-                Please enter your password.
-              </mat-error>
-            } @else if (signInForm.get('password')?.hasError('minlength')){
-              <mat-error>
-                Password must be at least 8 characters long.
-              </mat-error>
+            <input
+              matInput
+              id="password"
+              formControlName="password"
+              class="inputField"
+              type="password"
+              placeholder="Your password"
+              autocomplete="true"
+            />
+            @if (signInForm.get('password')?.hasError('required')) {
+              <mat-error> Please enter your password. </mat-error>
+            } @else if (signInForm.get('password')?.hasError('minlength')) {
+              <mat-error> Password must be at least 8 characters long. </mat-error>
             }
           </mat-form-field>
           <div class="wrapped-buttons">
-            <button mat-raised-button
-                    class="button" [disabled]="loading" (click)="signIn()">
+            <button mat-raised-button class="button" [disabled]="loading" (click)="signIn()">
               {{ loading ? 'Loading' : 'Sign In' }}
             </button>
-            <button mat-raised-button type="submit"
-                    class="button" [disabled]="loading" (click)="signUp()">
+            <button mat-raised-button type="submit" class="button" [disabled]="loading" (click)="signUp()">
               {{ loading ? 'Loading' : 'Sign Up' }}
             </button>
           </div>
@@ -60,4 +47,3 @@
 } @else {
   <mat-spinner></mat-spinner>
 }
-

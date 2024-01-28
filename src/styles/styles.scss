@@ -9,31 +9,37 @@ $my-warn: mat.define-palette(mat.$red-palette);
 $my-primary: mat.define-palette(mat.$indigo-palette, 500);
 $my-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
 
-$my-theme: mat.define-light-theme((
-  color: (
-    primary: $my-primary,
-    accent: $my-accent,
-    warn: $my-warn,
-  ),
-  typography: mat.define-typography-config(),
-  density: 0,
-));
+$my-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $my-primary,
+      accent: $my-accent,
+      warn: $my-warn
+    ),
+    typography: mat.define-typography-config(),
+    density: 0
+  )
+);
 
-$dark-theme: mat.define-dark-theme((
-  color: (
-    primary: mat.define-palette(mat.$pink-palette),
-    accent: mat.define-palette(mat.$blue-grey-palette),
-  ),
-  typography: mat.define-typography-config(),
-  density: 0,
-));
+$dark-theme: mat.define-dark-theme(
+  (
+    color: (
+      primary: mat.define-palette(mat.$pink-palette),
+      accent: mat.define-palette(mat.$blue-grey-palette)
+    ),
+    typography: mat.define-typography-config(),
+    density: 0
+  )
+);
 
-$light-theme: mat.define-light-theme((
-  color: (
-    primary: mat.define-palette(mat.$indigo-palette),
-    accent: mat.define-palette(mat.$pink-palette),
-  ),
-));
+$light-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: mat.define-palette(mat.$indigo-palette),
+      accent: mat.define-palette(mat.$pink-palette)
+    )
+  )
+);
 
 @include mat.core-theme($dark-theme);
 @include mat.button-theme($dark-theme);
@@ -48,7 +54,7 @@ $my-custom-typography-config: mat.define-typography-config(
   $headline-2: mat.define-typography-level(56px, 56px, 400, $letter-spacing: -0.02em),
   $headline-3: mat.define-typography-level(45px, 48px, 400, $letter-spacing: -0.005em),
   $headline-4: mat.define-typography-level(34px, 40px, 400),
-  $headline-5: mat.define-typography-level(24px, 32px, 400),
+  $headline-5: mat.define-typography-level(24px, 32px, 400)
 );
 
 // -----------------------------------------------------------------------------------------------

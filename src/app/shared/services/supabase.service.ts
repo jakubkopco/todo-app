@@ -1,7 +1,8 @@
-import {Injectable} from '@angular/core';
-import {AuthChangeEvent, AuthSession, createClient, Session, SupabaseClient} from "@supabase/supabase-js";
-import {environment} from "../../../environments/environment";
-import {Subject} from "rxjs";
+import { Injectable } from '@angular/core';
+import { AuthChangeEvent, AuthSession, createClient, Session, SupabaseClient } from '@supabase/supabase-js';
+import { Subject } from 'rxjs';
+
+import { environment } from '../../../environments/environment';
 
 export interface UserModel {
   id: string;
@@ -26,7 +27,7 @@ export class SupabaseService {
   }
 
   get session(): AuthSession | null {
-    this.supabase.auth.getSession().then(({data}) => {
+    this.supabase.auth.getSession().then(({ data }) => {
       this._session = data.session;
       this.userSessionSubject.next({
         id: data.session?.user?.id as string,
