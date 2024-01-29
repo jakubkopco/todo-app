@@ -1,0 +1,5 @@
+@use 'button-component';
+
+@mixin styles() {
+  @include button-component.styles();
+}

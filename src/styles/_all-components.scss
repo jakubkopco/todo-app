@@ -5,6 +5,7 @@
 @use 'list';
 @use 'virtual-scroll';
 @use 'toolbar';
+@use 'button';
 
 @mixin all-component-styles() {
   @include spinner.styles();
@@ -14,4 +15,5 @@
   @include list.styles();
   @include virtual-scroll.styles();
   @include toolbar.styles();
+  @include button.styles();
 }
