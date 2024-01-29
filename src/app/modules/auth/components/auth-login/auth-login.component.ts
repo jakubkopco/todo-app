@@ -1,4 +1,4 @@
-import { Component, effect } from '@angular/core';
+import { Component, effect, signal } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
 import { MatCard, MatCardActions, MatCardContent, MatCardHeader, MatCardTitle } from '@angular/material/card';
@@ -32,7 +32,7 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./auth-login.component.scss']
 })
 export class AuthLoginComponent {
-  protected loading = false;
+  protected loading = signal<boolean>(false);
   readonly signInForm: FormGroup;
 
   constructor(
@@ -55,9 +55,10 @@ export class AuthLoginComponent {
 
   async signIn(): Promise<void> {
     if (this.signInForm.valid) {
+      this.loading.set(true);
       try {
-        this.loading = true;
         this.supabase.signIn(this.signInForm.value).then(res => {
+          this.loading.set(false);
           if (res.error) {
             this.dialogService.openDialog({
               title: 'Error',
@@ -66,12 +67,12 @@ export class AuthLoginComponent {
           }
         });
       } catch (error) {
+        this.loading.set(false);
         if (error instanceof Error) {
           alert(error.message);
         }
       } finally {
         this.signInForm.reset();
-        this.loading = false;
       }
     }
   }
@@ -79,8 +80,9 @@ export class AuthLoginComponent {
   async signUp(): Promise<void> {
     if (this.signInForm.valid) {
       try {
-        this.loading = true;
+        this.loading.set(true);
         this.supabase.signUpNewUser(this.signInForm.value).then(res => {
+          this.loading.set(false);
           if (res.error) {
             this.dialogService.openDialog({
               title: 'Error',
@@ -94,12 +96,12 @@ export class AuthLoginComponent {
           }
         });
       } catch (error) {
+        this.loading.set(false);
         if (error instanceof Error) {
           alert(error.message);
         }
       } finally {
         this.signInForm.reset();
-        this.loading = false;
       }
     }
   }
