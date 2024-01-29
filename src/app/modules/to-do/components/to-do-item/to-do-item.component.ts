@@ -31,6 +31,7 @@ import { ToDoItemDTO } from '../../models/to-do-item.model';
       }
 
       .title-with-date {
+        align-self: center;
         margin: 0;
         font-size: 22px;
         font-weight: bold;
