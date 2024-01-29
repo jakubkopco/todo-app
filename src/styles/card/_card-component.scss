@@ -4,10 +4,16 @@
     width: 100%;
     margin: 30px;
     border-radius: 0.8rem !important;
+    padding: 1.2rem;
+
     mat-card-header {
       display: flex;
       padding-bottom: 20px;
       justify-content: center;
+    }
+
+    mat-card-title {
+      font-size: 28px;
     }
 
     mat-card-actions {

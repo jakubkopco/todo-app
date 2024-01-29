@@ -1,5 +1,8 @@
 @mixin styles() {
   mat-form-field {
     margin-bottom: 20px;
+    .mat-mdc-text-field-wrapper {
+      border-radius: 0.8rem !important;
+    }
   }
 }

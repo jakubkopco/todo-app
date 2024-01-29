@@ -3,29 +3,16 @@
 
 @include core.styles();
 @include all-components.all-component-styles();
-// -----------------------------------------------------------------------------------------------
 
 body {
   margin: 0 !important;
   background-color: ivory !important;
 }
 
+.cdk-overlay-pane {
+  width: 600px !important;
+}
+
 .mdc-line-ripple::before {
   display: none;
-}
-
-.mat-mdc-text-field-wrapper {
-  border-radius: 0.8rem !important;
-}
-
-mat-card-title {
-  font-size: 28px;
-}
-
-mat-card {
-  padding: 1.2rem;
-}
-
-mat-icon {
-  cursor: pointer;
 }
