@@ -1,7 +1,7 @@
 <div class="wrapped-container">
   <app-to-do-toolbar></app-to-do-toolbar>
   <div class="wrappedForm">
-    <form [formGroup]="todoForm" #formGroupDirective="ngForm" (ngSubmit)="addItem(formGroupDirective)">
+    <form [formGroup]="todoForm" #formGroupDirective="ngForm">
       <div style="display: flex">
         <mat-form-field class="title-form-field">
           <mat-label>Title</mat-label>
