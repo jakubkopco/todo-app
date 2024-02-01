@@ -2,6 +2,7 @@ import { ApplicationConfig } from '@angular/core';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldDefaultOptions } from '@angular/material/form-field';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter } from '@angular/router';
+
 import { routes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {
@@ -13,6 +14,6 @@ export const appConfig: ApplicationConfig = {
       useValue: {
         subscriptSizing: 'dynamic'
       } as MatFormFieldDefaultOptions
-    },
+    }
   ]
 };

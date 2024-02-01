@@ -7,8 +7,8 @@ import { MatLabel } from '@angular/material/form-field';
 import { MatIcon } from '@angular/material/icon';
 import { MatInput } from '@angular/material/input';
 
-import { ToDoItemsStore } from '../../to-do.store';
 import { ToDoItemDTO, ToDoItemStatus } from '../../models/to-do-item.model';
+import { ToDoItemsStore } from '../../to-do.store';
 import { ToDoFilterSelectorComponent } from '../to-do-filter-selector/to-do-filter-selector.component';
 import { ToDoItemComponent } from '../to-do-item/to-do-item.component';
 

@@ -10,9 +10,9 @@ import { MatInput, MatInputModule } from '@angular/material/input';
 import { MatList, MatListItem } from '@angular/material/list';
 
 import { ToDoListComponent } from './components/to-do-list/to-do-list.component';
-import { ToDoItemsStore } from './to-do.store';
 import { ToDoToolbarComponent } from './components/to-do-toolbar/to-do-toolbar.component';
 import { ToDoItemForm } from './models/to-do-item.model';
+import { ToDoItemsStore } from './to-do.store';
 import { AlphanumericOnlyDirective } from '../../shared/directives/alphanumeric-only.directive';
 import { CustomDialogService } from '../../shared/services/custom-dialog.service';
 
