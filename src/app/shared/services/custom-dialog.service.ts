@@ -16,7 +16,6 @@ export class CustomDialogService {
 
   openDialog(data: DialogData) {
     this.dialog.open(CustomDialogComponent, {
-      width: '25%',
       data: {
         title: data.title,
         message: data.message

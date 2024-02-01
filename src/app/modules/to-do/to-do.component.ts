@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { FormControl, FormGroup, NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, inject } from '@angular/core';
+import { FormControl, FormGroup, FormGroupDirective, NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFabButton } from '@angular/material/button';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepicker, MatDatepickerModule, MatDatepickerToggle } from '@angular/material/datepicker';
@@ -10,9 +10,9 @@ import { MatInput, MatInputModule } from '@angular/material/input';
 import { MatList, MatListItem } from '@angular/material/list';
 
 import { ToDoListComponent } from './components/to-do-list/to-do-list.component';
+import { ToDoItemsStore } from './to-do.store';
 import { ToDoToolbarComponent } from './components/to-do-toolbar/to-do-toolbar.component';
 import { ToDoItemForm } from './models/to-do-item.model';
-import { ToDoStateService } from './services/to-do-state.service';
 import { AlphanumericOnlyDirective } from '../../shared/directives/alphanumeric-only.directive';
 import { CustomDialogService } from '../../shared/services/custom-dialog.service';
 
@@ -46,14 +46,15 @@ interface ToDoForm {
     AlphanumericOnlyDirective,
     MatFabButton
   ],
+  providers: [ToDoItemsStore],
   templateUrl: './to-do.component.html',
   styleUrl: './to-do.component.scss'
 })
 export class ToDoComponent {
   readonly todoForm: FormGroup<ToDoForm>;
+  readonly store = inject(ToDoItemsStore);
 
   constructor(
-    private readonly todoStateService: ToDoStateService,
     private readonly formBuilder: NonNullableFormBuilder,
     private readonly dialogService: CustomDialogService
   ) {
@@ -64,11 +65,12 @@ export class ToDoComponent {
     });
   }
 
-  async addItem(): Promise<void> {
+  async addItem(formGroupDirective: FormGroupDirective): Promise<void> {
     if (this.todoForm.valid && this.isToDoItemForm(this.todoForm.value)) {
       try {
-        await this.todoStateService.createToDoItem(this.todoForm.value);
+        await this.store.createToDoItem(this.todoForm.value);
         this.todoForm.reset();
+        formGroupDirective.resetForm();
       } catch (e) {
         console.error(e);
       }

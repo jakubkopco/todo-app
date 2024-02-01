@@ -7,8 +7,8 @@ import { MatLabel } from '@angular/material/form-field';
 import { MatIcon } from '@angular/material/icon';
 import { MatInput } from '@angular/material/input';
 
+import { ToDoItemsStore } from '../../to-do.store';
 import { ToDoItemDTO, ToDoItemStatus } from '../../models/to-do-item.model';
-import { ToDoStateService } from '../../services/to-do-state.service';
 import { ToDoFilterSelectorComponent } from '../to-do-filter-selector/to-do-filter-selector.component';
 import { ToDoItemComponent } from '../to-do-item/to-do-item.component';
 
@@ -32,10 +32,10 @@ import { ToDoItemComponent } from '../to-do-item/to-do-item.component';
   templateUrl: './to-do-list.component.html'
 })
 export class ToDoListComponent {
-  private readonly toDoItems = inject(ToDoStateService).toDoItems;
-  private readonly todoService = inject(ToDoStateService);
   private readonly selectedFilter = signal<ToDoItemStatus>(ToDoItemStatus.All);
   private readonly searchQuery = signal<string>('');
+  readonly store = inject(ToDoItemsStore);
+  protected toDoItems = this.store.toDoItems;
 
   protected itemSize = computed(() => this.toDoItems().length);
   protected filteredToDoItems = computed(() => {
@@ -61,11 +61,11 @@ export class ToDoListComponent {
     this.searchItems(this.searchQuery());
   }
   async onUpdateItem(item: ToDoItemDTO): Promise<void> {
-    await this.todoService.updateToDoItem(item);
+    await this.store.updateToDoItem(item);
   }
 
   async onDeleteItem(item: ToDoItemDTO): Promise<void> {
-    await this.todoService.deleteToDoItem(item);
+    await this.store.deleteToDoItem(item);
   }
 
   trackByFn(index: number, item: ToDoItemDTO) {
