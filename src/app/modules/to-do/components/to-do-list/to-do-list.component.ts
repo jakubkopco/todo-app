@@ -60,12 +60,13 @@ export class ToDoListComponent {
     this.selectedFilter.set(status);
     this.searchItems(this.searchQuery());
   }
-  async onUpdateItem(item: ToDoItemDTO): Promise<void> {
-    await this.store.updateToDoItem(item);
+
+  onUpdateItem(item: ToDoItemDTO) {
+    this.store.updateToDoItem(item);
   }
 
-  async onDeleteItem(item: ToDoItemDTO): Promise<void> {
-    await this.store.deleteToDoItem(item);
+  onDeleteItem(item: ToDoItemDTO) {
+    this.store.deleteToDoItem(item);
   }
 
   trackByFn(index: number, item: ToDoItemDTO) {
